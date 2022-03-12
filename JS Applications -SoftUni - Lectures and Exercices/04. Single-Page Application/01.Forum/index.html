@@ -11,7 +11,7 @@
     <title>SoftUni Forum</title>
 </head>
 
-<body>
+<body class="body">
 
     <header>
         <div class="mini-navbar-wrap">
@@ -25,7 +25,7 @@
         <nav>
             <ul>
                 <li>
-                    <a href="#">Home</a>
+                    <a id="anchor-home">Home</a>
                 </li>
             </ul>
         </nav>
@@ -38,7 +38,7 @@
                 <div class="header-background">
                     <span>New Topic</span>
                 </div>
-                <form>
+                <form id="post-form">
                     <div class="new-topic-title">
                         <label for="topicName">Title <span class="red">*</span></label>
                         <input type="text" name="topicName" id="topicName">
@@ -63,8 +63,10 @@
 
                 <!-- topic component  -->
                 <div class="topic-container">
-                    
+
                 </div>
+                    
+            </div>
                 
 
         </main>
@@ -76,6 +78,7 @@
         <p>You can find the real SoftUni forum at this link:</p>
         <p><span><a href="https://softuni.bg/forum">https://softuni.bg/forum</a></span></p>
     </footer>
+    <script type="module" src="app.js"></script>
 </body>
 
 </html>

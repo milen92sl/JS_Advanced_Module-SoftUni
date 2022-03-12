@@ -1,6 +1,6 @@
-@import url('typography.css');
-@import url('new-topic.css');
-@import url('topic-content.css');
+@import url("typography.css");
+@import url("new-topic.css");
+@import url("topic-content.css");
 
 body {
     max-width: 980px;
@@ -65,11 +65,11 @@ header ul span {
 
 header li {
     list-style: none;
-    margin: .35em;
-    padding: 0 .95em;
+    margin: 0.35em;
+    padding: 0 0.95em;
 }
 
-header a {
+a {
     text-decoration: none;
     color: white;
     cursor: pointer;
@@ -86,8 +86,8 @@ nav {
 }
 
 .logo-wrap {
-    font-family: 'Parisienne', cursive;
-    letter-spacing: .5em;
+    font-family: "Parisienne", cursive;
+    letter-spacing: 0.5em;
     margin: 0.5em 0;
 }
 
@@ -107,9 +107,9 @@ nav {
     border-radius: 5px;
 }
 
-.mini-navbar ul li+li {
+.mini-navbar ul li + li {
     border-left: 1px solid lightgrey;
-    padding-left: .5em;
+    padding-left: 0.5em;
 }
 
 /* main  */
@@ -129,7 +129,8 @@ main {
     font-weight: bold;
 }
 
-.topic-container h2, p {
+.topic-container h2,
+p {
     padding: 0.3em 0 0.2em;
     margin: 0;
 }
@@ -198,7 +199,7 @@ aside {
     padding: 0;
 }
 
-.aside>div {
+.aside > div {
     border: 1px solid #999;
     border-radius: 0.3em;
     padding: 0.3em 0.5em;
@@ -222,7 +223,7 @@ aside {
     padding-left: 0.5rem;
 }
 
-.aside-topic+.aside-topic {
+.aside-topic + .aside-topic {
     border-top: dashed 1px #999;
 }
 
@@ -239,7 +240,6 @@ aside {
 
 footer {
     background: rgb(0, 212, 255);
-    ;
     margin-top: 1em;
     position: absolute;
     bottom: 0;
