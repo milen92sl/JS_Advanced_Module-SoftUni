@@ -1,37 +1,37 @@
-import { html, render } from '../node_modules/lit-html/lit-html.js';
-import { towns } from './towns.js';
+import {towns as townNames} from "./towns.js";
+import {render, html} from "./node_modules/lit-html/lit-html.js";
 
-const searchTemplate = (towns, match) => html`
-<article>
-   <div id="towns">
-      <ul>
-         ${towns.map(t => itemTemplate(t, match))}
-      </ul>
-   </div>
-   <input type="text" id="searchText" />
-   <button @click = ${search}>Search</button>
-   <div id="result">${countMatches(towns, match)}</div>
-</article>
-`
-const itemTemplate = (name, match) => html`
-   <li class = ${(match && name.toLowerCase().includes(match.toLowerCase())) ? 'active' : ''}>${name} </li>
-`
+const listTemplate = (towns) => html`
+    <ul>
+        ${towns.map(t => html`
+            <li class=${t.match ? 'active' : ''}>${t.name}</li>`)}
+    </ul>
+`;
 
-const main = document.body;
+const towns = townNames.map(t => ({name: t, match: false}))
+const root = document.getElementById('towns');
+const input = document.getElementById('searchText');
+const output = document.getElementById('result');
+
+document.querySelector('button').addEventListener('click', onSearch);
+
+function update() {
+    render(listTemplate(towns), root);
+}
+
 update();
 
-function update(match = '') {
-   const result = searchTemplate(towns, match);
-   render(result,main);
-}
-
-function search() {
-   const match = document.getElementById('searchText').value;
-   update(match);
-
-}
-
-function countMatches(towns, match){
-   const matches = towns.filter(t => match && t.toLowerCase().includes(match.toLowerCase())).length;
-      return `${matches} matches found`;
+function onSearch() {
+    const match = input.value.trim().toLocaleLowerCase();
+    let matches = 0;
+    for (const town of towns) {
+        if (match && town.name.toLocaleLowerCase().includes(match)) {
+            town.match = true;
+            matches++;
+        } else {
+            town.match = false;
+        }
+    }
+    output.textContent = `${matches} matches found`;
+    update();
 }

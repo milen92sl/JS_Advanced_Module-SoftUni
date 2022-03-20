@@ -1,25 +1,14 @@
-import { html, render } from '../node_modules/lit-html/lit-html.js';
-
-
-document.getElementById('btnLoadTowns').addEventListener('click', getTowns);
-
-const listTemplate = (data) => html`
-<ul>
-    ${data.map(town => html `<li>${town}</li>`)}
-</ul>`;
-
-function getTowns(event) {
+import {html, render} from "./node_modules/lit-html/lit-html.js";
+const root = document.getElementById('root');
+document.querySelector('form').addEventListener('submit', (event) => {
     event.preventDefault();
-
-   if(document.getElementById('towns').value !== ''){
-    const root = document.getElementById('root');
-    const towns = document.getElementById('towns').value.split(', ');
-
-    const ul = document.createElement('ul');
-
+    const towns = document.getElementById('towns').value.split(',').map(t => t.trim());
     const result = listTemplate(towns);
+    render(result, root)
+});
 
-    render(result, root);
-    root.appendChild(ul);
-   }
-}
+const listTemplate = (towns) => html`
+    <ul>
+        ${towns.map(t => html`<li>${t}</li>`)}
+    </ul>
+`
