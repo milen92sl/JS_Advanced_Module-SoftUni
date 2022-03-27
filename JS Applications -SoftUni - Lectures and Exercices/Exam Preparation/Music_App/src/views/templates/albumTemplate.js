@@ -1,0 +1,29 @@
+import { html } from "../../../node_modules/lit-html/lit-html.js";
+
+import * as albumService from '../services/albumService.js';
+import { albumTemplate } from './templates/albumTemplate'
+
+
+const albumDetails = (albumId) =>  html`
+<div class="btn-group">
+    <a href="/albums/${albumId}" id="details">Details</a>
+</div>
+`;
+
+export const albumTemplate = (album, withDetails = true) => html`
+<div class="card-box">
+    <img src=${album.imageUrl}>
+    <div>
+        <div class="text-center">
+            <p class="name">Name: ${album.name}</p>
+            <p class="artist">Artist: ${album.artistalbum}</p>
+            <p class="genre">Genre: ${album.genre}</p>
+            <p class="price">Price: ${album.price}</p>
+            <p class="date">Release Date: ${album.releaseDate}</p>
+        </div>
+        ${withDetails 
+        ? albumDetails(album._id)
+        : nothing}
+    </div>
+</div>
+`;
