@@ -1,10 +1,7 @@
-import page  from '../node_modules/page/page.mjs';
+import page from '../node_modules/page/page.mjs';
 
 import { addSession } from './middlewares/session.js';
-import { appRender } from './middlewares/render.js';
-
-import { logout } from './api/user.js';
-
+import { addRender } from './middlewares/render.js';
 import { catalogPage } from './views/catalog.js';
 import { createPage } from './views/create.js';
 import { detailsPage } from './views/details.js';
@@ -12,14 +9,14 @@ import { editPage } from './views/edit.js';
 import { homePage } from './views/home.js';
 import { loginPage } from './views/login.js';
 import { registerPage } from './views/register.js';
+import { logout } from './api/user.js';
 
-// import * as api from './api/games.js'
-
-// window.api = api;
+import * as api from './api/games.js';
+window.api = api;
 
 
 page(addSession);
-page(appRender);
+page(addRender);
 
 page('/', homePage);
 page('/catalog', catalogPage);
@@ -30,10 +27,9 @@ page('/details/:id', detailsPage);
 page('/edit/:id', editPage);
 page('/logout', onLogout);
 
-
 page.start();
 
-function onLogout(ctx){
+function onLogout(){
     logout();
-    ctx.page.redirect('/');
+    page.redirect('/');
 }

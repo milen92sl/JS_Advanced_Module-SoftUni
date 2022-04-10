@@ -3,7 +3,9 @@ import { html } from '../../node_modules/lit-html/lit-html.js';
 import * as gamesService from '../api/games.js';
 import { createSubmitHandler } from '../util.js';
 
-const editTemplate = (game, onSubmit) => html`<!-- Edit Page ( Only for the creator )-->
+
+
+const editTemplate = (game, onSubmit) => html`
 <section id="edit-page" class="auth">
     <form @submit=${onSubmit} id="edit">
         <div class="container">
@@ -19,7 +21,7 @@ const editTemplate = (game, onSubmit) => html`<!-- Edit Page ( Only for the crea
             <input type="number" id="maxLevel" name="maxLevel" min="1" .value=${game.maxLevel}>
 
             <label for="game-img">Image:</label>
-            <input type="text" id="imageUrl" name="imageUrl" .value=${game.imageUrl}>
+            <input type="text" id="imageUrl" name="imageUrl" .value=${game.ImageUrl}>
 
             <label for="summary">Summary:</label>
             <textarea name="summary" id="summary" .value=${game.summary}></textarea>
@@ -31,21 +33,20 @@ const editTemplate = (game, onSubmit) => html`<!-- Edit Page ( Only for the crea
 `;
 
 export async function editPage(ctx) {
-
     const gameId = ctx.params.id;
     const game = await gamesService.getById(gameId);
 
     ctx.render(editTemplate(game, createSubmitHandler(ctx, onSubmit)));
 }
 
-async function onSubmit(ctx, data, event){
+async function onSubmit(ctx, data, event) {
     const gameId = ctx.params.id;
 
-    if(Object.values(data).some(f => f == '')){
-        return alert('All fields are required!')
+    if (Object.values(data).some(g => g == '')) {
+        return alert('All fields are required!');
     }
-    
-    await gamesService.udpate(gameId, {
+
+    await gamesService.update(gameId ,{
         title: data.title,
         category: data.category,
         maxLevel: data.maxLevel,

@@ -1,10 +1,9 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
 import { createSubmitHandler } from '../util.js';
 
-import * as usersService from '../api/user.js';
+import * as userService from '../api/user.js';
 
-
-const registerTemplate = () => html`<!-- Register Page ( Only for Guest users ) -->
+const registerTemplate = (onSubmit) => html`
 <section id="register-page" class="content auth">
     <form @submit=${onSubmit} id="register">
         <div class="container">
@@ -23,7 +22,7 @@ const registerTemplate = () => html`<!-- Register Page ( Only for Guest users ) 
             <input class="btn submit" type="submit" value="Register">
 
             <p class="field">
-                <span>If you already have profile click <a href="#">here</a></span>
+                <span>If you already have profile click <a href="/login">here</a></span>
             </p>
         </div>
     </form>
@@ -35,14 +34,14 @@ export function registerPage(ctx) {
 }
 
 async function onSubmit(ctx, data, event) {
-    if (data.email == '' || data.password == '') {
-        return alert('All fields are required!');
-    } 
-    if(data.password != data['confirm-password']){
-        return alert('Passwords don\'t match!');
-    }
+        if(data.email == '' || data.password == ''){
+            return alert('All fields are required!');
+        }
+        if(data.password !== data['confirm-password']){
+            return alert('Password don\'t match!');
+        }
 
-    await usersService.register(data.email, data.password);
+    await userService.register(data.email, data.password);
     event.target.reset();
     ctx.page.redirect('/');
 }

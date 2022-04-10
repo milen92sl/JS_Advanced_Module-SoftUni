@@ -2,8 +2,7 @@ import { html } from '../../node_modules/lit-html/lit-html.js';
 
 import * as gamesService from '../api/games.js';
 
-
-const homeTemplate = (games) => html`<!--Home Page-->
+const homeTemplate = (games) => html`
 <section id="welcome-world">
 
     <div class="welcome-message">
@@ -15,11 +14,13 @@ const homeTemplate = (games) => html`<!--Home Page-->
     <div id="home-page">
         <h1>Latest Games</h1>
 
+        <!-- Display div: with information about every game (if any) -->
         ${games.length > 0 
         ? games.map(previewTemplate)
-        : html`<p class="no-articles">No games yet</p>`
-        } <!-- Display paragraph: If there is no games  -->
-        
+        : html `<p class="no-articles">No games yet</p>`
+        }
+
+        <!-- Display paragraph: If there is no games  -->
         
     </div>
 </section>
@@ -39,7 +40,9 @@ const previewTemplate = (game) => html`
     </div>
 </div>
 `;
+
 export async function homePage(ctx) {
+
     const games = await gamesService.getRecent();
     ctx.render(homeTemplate(games));
 }

@@ -1,9 +1,8 @@
 import { html } from '../../node_modules/lit-html/lit-html.js';
 import { createSubmitHandler } from '../util.js';
-
 import * as gamesService from '../api/games.js';
 
-const createTemplate = () => html`<!-- Create Page ( Only for logged-in users ) -->
+const createTemplate = (onSubmit) => html`
 <section id="create-page" class="auth">
     <form @submit=${onSubmit} id="create">
         <div class="container">
@@ -30,15 +29,15 @@ const createTemplate = () => html`<!-- Create Page ( Only for logged-in users ) 
 `;
 
 export function createPage(ctx) {
+
     ctx.render(createTemplate(createSubmitHandler(ctx, onSubmit)));
 }
 
-async function onSubmit(ctx, data, event){
-
-    if(Object.values(data).some(f => f == '')){
-        return alert('All fields are required!')
+async function onSubmit(ctx, data, event) {
+    if (Object.values(data).some(x => x == '')) {
+        return alert('All fields are required!');
     }
-    
+
     await gamesService.create({
         title: data.title,
         category: data.category,
